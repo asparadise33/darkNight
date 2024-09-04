@@ -1,9 +1,11 @@
 import { Button } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
+// import { useState } from 'react';
 
 function Home() {
   const { user } = useAuth();
+  // const [jobs, setJobs] = useState([]);
 
   return (
     <div
