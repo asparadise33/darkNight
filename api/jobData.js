@@ -40,45 +40,31 @@ const getJobs = () => new Promise((resolve, reject) => {
 //     .catch(reject);
 // });
 
-// // TODO: CREATE BOOK
-// const createBook = (payload) => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/books.json`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(payload),
-//   })
-//     .then((response) => response.json())
-//     .then((data) => resolve(data))
-//     .catch(reject);
-// });
+const createJob = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/Job.json`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
 
-// // TODO: UPDATE BOOK
-// const updateBook = (payload) => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/books/${payload.firebaseKey}.json`, {
-//     method: 'PATCH',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(payload),
-//   })
-//     .then((response) => response.json())
-//     .then((data) => resolve(data))
-//     .catch(reject);
-// });
-
-// const getBooksByAuthor = (firebaseKey) => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/books.json?orderBy="author_id"&equalTo="${firebaseKey}"`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => resolve(Object.values(data)))
-//     .catch(reject);
-// });
+const updateJob = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/Job/${payload.firebaseKey}.json`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
 
 // const booksOnSale = (uid) => new Promise((resolve, reject) => {
 //   fetch(`${endpoint}/books.json?orderBy="uid"&equalTo="${uid}"`, {
@@ -95,4 +81,4 @@ const getJobs = () => new Promise((resolve, reject) => {
 //     .catch(reject);
 // });
 
-export default getJobs;
+export { getJobs, createJob, updateJob };

@@ -1,119 +1,103 @@
-// import React, { useEffect, useState } from 'react';
-// import { useRouter } from 'next/router';
-// import PropTypes from 'prop-types';
-// import FloatingLabel from 'react-bootstrap/FloatingLabel';
-// import Form from 'react-bootstrap/Form';
-// import { Button } from 'react-bootstrap';
-// import { useAuth } from '../utils/context/authContext';
-// import { createAuthor, updateAuthor } from '../../api/authorData';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import { Button } from 'react-bootstrap';
+import { useAuth } from '../utils/context/authContext';
+import { createJob, updateJob } from '../api/JobData';
 
-// const initialState = {
-//   first_name: '',
-//   last_name: '',
-//   email: '',
-//   favorite: false,
-// };
+const initialState = {
+  job_name: '',
+  company_name: '',
+  email: '',
+};
 
-// function AuthorForm({ obj }) {
-//   const [formInput, setFormInput] = useState(initialState);
-//   const router = useRouter();
-//   const { user } = useAuth();
+function JobForm({ obj }) {
+  const [formInput, setFormInput] = useState(initialState);
+  const router = useRouter();
+  const { user } = useAuth();
 
-//   useEffect(() => {
-//     if (obj.firebaseKey) setFormInput(obj);
-//   }, [obj, user]);
+  useEffect(() => {
+    if (obj.firebaseKey) setFormInput(obj);
+  }, [obj, user]);
 
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormInput((prevState) => ({
-//       ...prevState,
-//       [name]: value,
-//     }));
-//   };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormInput((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     if (obj.firebaseKey) {
-//       updateAuthor(formInput).then(() => router.push(`/author/${obj.firebaseKey}`));
-//     } else {
-//       const payload = { ...formInput, uid: user.uid };
-//       createAuthor(payload).then(({ name }) => {
-//         const patchPayload = { firebaseKey: name };
-//         updateAuthor(patchPayload).then(() => {
-//           router.push('/');
-//         });
-//       });
-//     }
-//   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (obj.firebaseKey) {
+      updateJob(formInput).then(() => router.push(`/edit/${obj.firebaseKey}`));
+    } else {
+      const payload = { ...formInput, uid: user.uid };
+      createJob(payload).then(({ name }) => {
+        const patchPayload = { firebaseKey: name };
+        updateJob(patchPayload).then(() => {
+          router.push('/');
+        });
+      });
+    }
+  };
 
-//   return (
-//     <Form onSubmit={handleSubmit}>
-//       <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Author</h2>
+  return (
+    <Form onSubmit={handleSubmit}>
+      <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Author</h2>
 
-//       <FloatingLabel controlId="floatingInput1" label="First Name" className="mb-3">
-//         <Form.Control
-//           type="text"
-//           placeholder="Author's First Name"
-//           name="first_name"
-//           value={formInput.first_name}
-//           onChange={handleChange}
-//           required
-//         />
-//       </FloatingLabel>
+      <FloatingLabel controlId="floatingInput1" label="Job Name" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Name of Job"
+          name="job_name"
+          value={formInput.job_name}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
 
-//       <FloatingLabel controlId="floatingInput2" label="Last Name" className="mb-3">
-//         <Form.Control
-//           type="text"
-//           placeholder="Enter Author's Last Name"
-//           name="last_name"
-//           value={formInput.last_name}
-//           onChange={handleChange}
-//           required
-//         />
-//       </FloatingLabel>
+      <FloatingLabel controlId="floatingInput2" label="Last Name" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Name of Company"
+          name="company_name"
+          value={formInput.company_name}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
 
-//       <FloatingLabel controlId="floatingInput2" label="Email" className="mb-3">
-//         <Form.Control
-//           type="text"
-//           placeholder="Add Email"
-//           name="email"
-//           value={formInput.email}
-//           onChange={handleChange}
-//           required
-//         />
-//       </FloatingLabel>
+      <FloatingLabel controlId="floatingInput2" label="Email" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Add Email"
+          name="email"
+          value={formInput.email}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
 
-//       <Form.Check
-//         className="text-white mb-3"
-//         type="switch"
-//         id="favorite"
-//         name="favorite"
-//         label="favorite?"
-//         checked={formInput.favorite}
-//         onChange={(e) => {
-//           setFormInput((prevState) => ({
-//             ...prevState,
-//             favorite: e.target.checked,
-//           }));
-//         }}
-//       />
-//       <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Author</Button>
-//     </Form>
-//   );
-// }
+      <Button variant="warning" type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Job</Button>
+    </Form>
+  );
+}
 
-// AuthorForm.propTypes = {
-//   obj: PropTypes.shape({
-//     first_name: PropTypes.string,
-//     last_name: PropTypes.string,
-//     email: PropTypes.string,
-//     favorite: PropTypes.bool,
-//     firebaseKey: PropTypes.string,
-//   }),
-// };
+JobForm.propTypes = {
+  obj: PropTypes.shape({
+    job_name: PropTypes.string,
+    company_name: PropTypes.string,
+    email: PropTypes.string,
+    firebaseKey: PropTypes.string,
+  }),
+};
 
-// AuthorForm.defaultProps = {
-//   obj: initialState,
-// };
+JobForm.defaultProps = {
+  obj: initialState,
+};
 
-// export default AuthorForm;
+export default JobForm;

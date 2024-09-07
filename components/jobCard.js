@@ -11,7 +11,7 @@ function JobCard({ jobObj }) {
       <Card.Body>
         <p className="card-text bold">{jobObj.company_name}</p>
         <Link href="/view" passHref>
-          <Button variant="primary" className="m-2">VIEW</Button>
+          <Button variant="dark" className="m-2">VIEW</Button>
         </Link>
         <Link href="/edit" passHref>
           <Button variant="info">EDIT</Button>
