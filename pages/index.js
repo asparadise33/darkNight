@@ -1,27 +1,24 @@
-import { Button } from 'react-bootstrap';
-import { signOut } from '../utils/auth';
-import { useAuth } from '../utils/context/authContext';
-// import { useState } from 'react';
+import { useState, useEffect } from 'react';
+// import { useAuth } from '../utils/context/authContext';
+import getJobs from '../api/JobData';
+import JobCard from '../components/JobCard';
 
 function Home() {
-  const { user } = useAuth();
-  // const [jobs, setJobs] = useState([]);
+// const { user } = useAuth();
+  const [jobs, setJobs] = useState([]);
+
+  const getAllJobs = () => {
+    getJobs().then(setJobs);
+  };
+  useEffect(() => {
+    getAllJobs();
+  }, []);
 
   return (
-    <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
-      style={{
-        height: '90vh',
-        padding: '30px',
-        maxWidth: '400px',
-        margin: '0 auto',
-      }}
-    >
-      <h1>Hello {user.displayName}! </h1>
-      <p>Click the button below to logout!</p>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-        Sign Out
-      </Button>
+    <div className="d-flex flex-wrap">
+      {jobs.map((job) => (
+        <JobCard key={job.firebaseKey} jobObj={job} onUpdate={getAllJobs} />
+      ))}
     </div>
   );
 }

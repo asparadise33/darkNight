@@ -1,19 +1,18 @@
-// import { clientCredentials } from '../utils/client';
-// // API CALLS FOR BOOKS
+import { clientCredentials } from '../utils/client';
 
-// const endpoint = clientCredentials.databaseURL;
+const endpoint = clientCredentials.databaseURL;
 
-// const getBooks = (uid) => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/books.json?orderBy="uid"&equalTo="${uid}"`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => resolve(Object.values(data)))
-//     .catch(reject);
-// });
+const getJobs = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/Job.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
 
 // // TODO: DELETE BOOK
 // const deleteBook = (firebaseKey) => new Promise((resolve, reject) => {
@@ -96,12 +95,4 @@
 //     .catch(reject);
 // });
 
-// export {
-//   getBooks,
-//   createBook,
-//   booksOnSale,
-//   deleteBook,
-//   getSingleBook,
-//   updateBook,
-//   getBooksByAuthor,
-// };
+export default getJobs;
