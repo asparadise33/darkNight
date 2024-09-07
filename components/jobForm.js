@@ -10,7 +10,11 @@ import { createJob, updateJob } from '../api/JobData';
 const initialState = {
   job_name: '',
   company_name: '',
-  email: '',
+  board_name: '',
+  description: '',
+  job_type: '',
+  notes: '',
+  date_applied: '',
 };
 
 function JobForm({ obj }) {
@@ -60,7 +64,7 @@ function JobForm({ obj }) {
         />
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingInput2" label="Last Name" className="mb-3">
+      <FloatingLabel controlId="floatingInput2" label="Name of Company" className="mb-3">
         <Form.Control
           type="text"
           placeholder="Name of Company"
@@ -71,12 +75,56 @@ function JobForm({ obj }) {
         />
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingInput2" label="Email" className="mb-3">
+      <FloatingLabel controlId="floatingInput2" label="Job Board" className="mb-3">
         <Form.Control
           type="text"
-          placeholder="Add Email"
-          name="email"
-          value={formInput.email}
+          placeholder="Add Job Board"
+          name="board_name"
+          value={formInput.board_name}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
+
+      <FloatingLabel controlId="floatingInput2" label="Job Description" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Job Description"
+          name="description"
+          value={formInput.description}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
+
+      <FloatingLabel controlId="floatingInput2" label="Job Type" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Job Type"
+          name="job_type"
+          value={formInput.job_type}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
+
+      <FloatingLabel controlId="floatingInput2" label="notes" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Add Notes"
+          name="Notes"
+          value={formInput.notes}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
+
+      <FloatingLabel controlId="floatingInput2" label="Date Applied" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="date_applied"
+          name="date_applied"
+          value={formInput.date_applied}
           onChange={handleChange}
           required
         />
@@ -91,7 +139,11 @@ JobForm.propTypes = {
   obj: PropTypes.shape({
     job_name: PropTypes.string,
     company_name: PropTypes.string,
-    email: PropTypes.string,
+    board_name: PropTypes.string,
+    description: PropTypes.string,
+    job_type: PropTypes.string,
+    notes: PropTypes.string,
+    date_applied: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
 };
