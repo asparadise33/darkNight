@@ -37,7 +37,7 @@ function JobForm({ obj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.firebaseKey) {
-      updateJob(formInput).then(() => router.push(`/edit/${obj.firebaseKey}`));
+      updateJob(formInput).then(() => router.push('/'));
     } else {
       const payload = { ...formInput, uid: user.uid };
       createJob(payload).then(({ name }) => {
@@ -51,7 +51,7 @@ function JobForm({ obj }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Author</h2>
+      <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Job</h2>
 
       <FloatingLabel controlId="floatingInput1" label="Job Name" className="mb-3">
         <Form.Control

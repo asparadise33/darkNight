@@ -27,18 +27,17 @@ const getJobs = () => new Promise((resolve, reject) => {
 //     .catch(reject);
 // });
 
-// // TODO: GET SINGLE BOOK
-// const getSingleBook = (firebaseKey) => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/books/${firebaseKey}.json`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => resolve(data))
-//     .catch(reject);
-// });
+const getSingleJob = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/Job/${firebaseKey}.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
 
 const createJob = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/Job.json`, {
@@ -66,19 +65,6 @@ const updateJob = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// const booksOnSale = (uid) => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/books.json?orderBy="uid"&equalTo="${uid}"`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       const onSale = Object.values(data).filter((item) => item.sale);
-//       resolve(onSale);
-//     })
-//     .catch(reject);
-// });
-
-export { getJobs, createJob, updateJob };
+export {
+  getJobs, createJob, updateJob, getSingleJob,
+};

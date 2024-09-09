@@ -13,7 +13,7 @@ function JobCard({ jobObj }) {
         <Link href="/view" passHref>
           <Button variant="dark" className="m-2">VIEW</Button>
         </Link>
-        <Link href="/edit" passHref>
+        <Link href={`/edit/${jobObj.firebaseKey}`} passHref>
           <Button variant="info">EDIT</Button>
         </Link>
       </Card.Body>
