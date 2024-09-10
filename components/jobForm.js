@@ -112,7 +112,7 @@ function JobForm({ obj }) {
         <Form.Control
           type="text"
           placeholder="Add Notes"
-          name="Notes"
+          name="notes"
           value={formInput.notes}
           onChange={handleChange}
           required
