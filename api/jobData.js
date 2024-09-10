@@ -14,18 +14,17 @@ const getJobs = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// // TODO: DELETE BOOK
-// const deleteBook = (firebaseKey) => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/books/${firebaseKey}.json`, {
-//     method: 'DELETE',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => resolve((data)))
-//     .catch(reject);
-// });
+const deleteJob = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/Job/${firebaseKey}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve((data)))
+    .catch(reject);
+});
 
 const getSingleJob = (firebaseKey) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/Job/${firebaseKey}.json`, {
@@ -66,5 +65,5 @@ const updateJob = (payload) => new Promise((resolve, reject) => {
 });
 
 export {
-  getJobs, createJob, updateJob, getSingleJob,
+  getJobs, createJob, updateJob, getSingleJob, deleteJob,
 };

@@ -10,7 +10,7 @@ function JobCard({ jobObj }) {
       <Card.Title style={{ textAlign: 'center', paddingTop: '10px' }}>{jobObj.job_name}</Card.Title>
       <Card.Body>
         <p className="card-text bold">{jobObj.company_name}</p>
-        <Link href="/view" passHref>
+        <Link href={`/view/${jobObj.firebaseKey}`} passHref>
           <Button variant="dark" className="m-2">VIEW</Button>
         </Link>
         <Link href={`/edit/${jobObj.firebaseKey}`} passHref>
