@@ -5,27 +5,28 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../utils/context/authContext';
-import { createJob, updateJob } from '../api/JobData';
+import { createJob, updateJob, getCategory } from '../api/JobData';
 
 const initialState = {
   job_name: '',
   company_name: '',
   board_name: '',
   description: '',
-  job_type: '',
   notes: '',
   date_applied: '',
 };
 
 function JobForm({ obj }) {
-  const [formInput, setFormInput] = useState(initialState);
-  const router = useRouter();
-  const { user } = useAuth();
-
+  const [formInput, setFormInput] = useState(initialState); // this hook always needs two values, inital and what we are updating it to be, allows for a component to be rerendered when the update func is called
+  const [categories, setCategories] = useState([]);
+  const router = useRouter(); // hook to route to different pages
+  const { user } = useAuth(); // hook user specific
+  // hook for after our API call occurs
   useEffect(() => {
-    if (obj.firebaseKey) setFormInput(obj);
+    getCategory().then(setCategories);
+    if (obj.category) setFormInput(obj);
   }, [obj, user]);
-
+  // event handleChange tells the form what to do when updated
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormInput((prevState) => ({
@@ -33,7 +34,7 @@ function JobForm({ obj }) {
       [name]: value,
     }));
   };
-
+  // event handles the submit of the form either to create or update
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.firebaseKey) {
@@ -97,15 +98,25 @@ function JobForm({ obj }) {
         />
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingInput2" label="Job Type" className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Job Type"
-          name="job_type"
-          value={formInput.job_type}
+      <FloatingLabel controlId="floatingSelect" label="Job Category">
+        <Form.Select
+          type=""
+          placeholder="Job Category"
+          name="category"
           onChange={handleChange}
+          className="mb-3"
+          value={formInput.job_category}
           required
-        />
+        >
+          <option value="">Select a Job Category</option>
+          {
+            categories.map((category) => (
+              <option>
+                {category.category}
+              </option>
+            ))
+          }
+        </Form.Select>
       </FloatingLabel>
 
       <FloatingLabel controlId="floatingInput2" label="Add Notes" className="mb-3">
@@ -141,9 +152,9 @@ JobForm.propTypes = {
     company_name: PropTypes.string,
     board_name: PropTypes.string,
     description: PropTypes.string,
-    job_type: PropTypes.string,
     notes: PropTypes.string,
     date_applied: PropTypes.string,
+    category: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
 };

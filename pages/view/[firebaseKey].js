@@ -27,7 +27,7 @@ export default function ViewJob() {
         <p className="card-text bold">Company Name: {jobDetails.company_name}</p>
         <p className="card-text bold">Job Board Name: {jobDetails.board_name}</p>
         <p className="card-text bold">Job Description: {jobDetails.description}</p>
-        <p className="card-text bold">Job Type: {jobDetails.job_type}</p>
+        <p className="card-text bold">Job Type: {jobDetails.job_category}</p>
         <p className="card-text bold">Notes: {jobDetails.notes}</p>
         <p className="card-text bold">Date Applied: {jobDetails.date_applied}</p>
         <Button variant="dark" onClick={deleteThisJob} className="m-2">
@@ -44,7 +44,7 @@ ViewJob.propTypes = {
     company_name: PropTypes.string,
     board_name: PropTypes.string,
     description: PropTypes.string,
-    job_type: PropTypes.string,
+    job_category: PropTypes.string,
     notes: PropTypes.string,
     date_applied: PropTypes.string,
     firebaseKey: PropTypes.string,
