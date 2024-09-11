@@ -75,7 +75,7 @@ function JobForm({ obj }) {
         />
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingInput2" label="Job Board" className="mb-3">
+      <FloatingLabel controlId="floatingInput2" label="Add Job Board" className="mb-3">
         <Form.Control
           type="text"
           placeholder="Add Job Board"
@@ -108,7 +108,7 @@ function JobForm({ obj }) {
         />
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingInput2" label="notes" className="mb-3">
+      <FloatingLabel controlId="floatingInput2" label="Add Notes" className="mb-3">
         <Form.Control
           type="text"
           placeholder="Add Notes"
