@@ -64,6 +64,24 @@ const updateJob = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getCategory = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/Category.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 export {
-  getJobs, createJob, updateJob, getSingleJob, deleteJob,
+  getJobs, createJob, updateJob, getSingleJob, deleteJob, getCategory,
 };
