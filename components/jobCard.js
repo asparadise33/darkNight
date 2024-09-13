@@ -25,7 +25,7 @@ JobCard.propTypes = {
   jobObj: PropTypes.shape({
     job_name: PropTypes.string,
     category: PropTypes.string,
-    boardName: PropTypes.string,
+    board_name: PropTypes.string,
     company_name: PropTypes.string,
     description: PropTypes.string,
     notes: PropTypes.string,

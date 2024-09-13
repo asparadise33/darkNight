@@ -39,7 +39,6 @@ const getSingleJob = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 const createJob = (payload) => new Promise((resolve, reject) => {
-  console.warn(payload);
   fetch(`${endpoint}/Job.json`, {
     method: 'POST',
     headers: {
