@@ -14,6 +14,7 @@ const initialState = {
   description: '',
   notes: '',
   date_applied: '',
+  category: '',
 };
 
 function JobForm({ obj }) {
@@ -105,7 +106,7 @@ function JobForm({ obj }) {
           name="category"
           onChange={handleChange}
           className="mb-3"
-          value={formInput.job_category}
+          value={formInput.category}
           required
         >
           <option value="">Select a Job Category</option>
