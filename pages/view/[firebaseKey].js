@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
-import { getSingleJob, deleteJob } from '../../api/ohboy';
+import { getSingleJob, deleteJob } from '../../api/JobData';
 
 export default function ViewJob() {
   const [jobDetails, setjobDetails] = useState({});

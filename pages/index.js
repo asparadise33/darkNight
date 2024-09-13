@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { useAuth } from '../utils/context/authContext';
-import { getJobs } from '../api/ohboy';
+import { getJobs } from '../api/JobData';
 import JobCard from '../components/JobCard';
 
 function Home() {
