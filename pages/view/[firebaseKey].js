@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import PropTypes from 'prop-types';
 import { getSingleJob, deleteJob } from '../../api/JobData';
 
 export default function ViewJob() {
@@ -37,16 +36,3 @@ export default function ViewJob() {
     </Card>
   );
 }
-
-ViewJob.propTypes = {
-  jobDetails: PropTypes.shape({
-    job_name: PropTypes.string,
-    company_name: PropTypes.string,
-    board_name: PropTypes.string,
-    description: PropTypes.string,
-    category: PropTypes.string,
-    notes: PropTypes.string,
-    date_applied: PropTypes.string,
-    firebaseKey: PropTypes.string,
-  }).isRequired,
-};

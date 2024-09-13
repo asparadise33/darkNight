@@ -18,10 +18,10 @@ const initialState = {
 };
 
 function JobForm({ obj }) {
-  const [formInput, setFormInput] = useState(initialState); // this hook always needs two values, inital and what we are updating it to be, allows for a component to be rerendered when the update func is called
+  const [formInput, setFormInput] = useState(initialState); // hook manages state of a component (local or component specific) this hook always needs two values, inital and what we are updating it to be, allows for a component to be rerendered when the update func is called
   const [categories, setCategories] = useState([]);
-  const router = useRouter(); // hook to route to different pages
-  const { user } = useAuth(); // hook user specific
+  const router = useRouter(); // global state management hook to route to different pages
+  const { user } = useAuth(); // global hook user specific
   // hook for after our API call occurs
   useEffect(() => {
     getCategory().then(setCategories);
@@ -29,7 +29,9 @@ function JobForm({ obj }) {
   }, [obj, user]);
   // event handleChange tells the form what to do when updated
   const handleChange = (e) => {
+    console.warn(e.target);
     const { name, value } = e.target;
+    console.warn(name, value);
     setFormInput((prevState) => ({
       ...prevState,
       [name]: value,
@@ -42,8 +44,9 @@ function JobForm({ obj }) {
       updateJob(formInput).then(() => router.push('/'));
     } else {
       const payload = { ...formInput, uid: user.uid };
-      createJob(payload).then(({ name }) => {
-        const patchPayload = { firebaseKey: name };
+      createJob(payload).then((response) => {
+        const patchPayload = { firebaseKey: response.name };
+        console.warn(patchPayload, response);
         updateJob(patchPayload).then(() => {
           router.push('/');
         });
