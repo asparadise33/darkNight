@@ -5,7 +5,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../utils/context/authContext';
-import { createJob, updateJob, getCategory } from '../api/ohboy';
+import { createJob, updateJob, getCategory } from '../api/JobData';
 
 const initialState = {
   job_name: '',
