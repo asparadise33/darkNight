@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
-import { Button } from 'react-bootstrap';
+import { Button, Form, FloatingLabel } from 'react-bootstrap';
 import { useAuth } from '../utils/context/authContext';
 import { createJob, updateJob, getCategory } from '../api/JobData';
-
+// props are arguments we pass to components, pass data as parameters from one component to another like from the form to the card
 const initialState = {
   job_name: '',
   company_name: '',
@@ -18,16 +16,16 @@ const initialState = {
 };
 
 function JobForm({ obj }) {
-  const [formInput, setFormInput] = useState(initialState); // hook manages state of a component (local or component specific) this hook always needs two values, inital and what we are updating it to be, allows for a component to be rerendered when the update func is called
+  const [formInput, setFormInput] = useState(initialState); // hook manages state of a component (local or component specific) this hook always needs two values, inital value and what we are updating it to be, allows for a component to be rerendered when the update func is called
   const [categories, setCategories] = useState([]);
   const router = useRouter(); // global state management hook to route to different pages
-  const { user } = useAuth(); // global hook user specific
-  // hook for after our API call occurs
+  const { user } = useAuth(); // global hook user specific data
+  // hook for what occurs after we render or rerender the DOM, when it mounts/or remounts if something changes
   useEffect(() => {
     getCategory().then(setCategories);
     if (obj.category) setFormInput(obj);
-  }, [obj, user]);
-  // event handleChange tells the form what to do when updated
+  }, [obj, user]); // dependency array
+  // event are user events that occur whent the user does "something" the event handleChange tells the form what to do when something happens
   const handleChange = (e) => {
     console.warn(e.target);
     const { name, value } = e.target;
@@ -63,7 +61,7 @@ function JobForm({ obj }) {
           type="text"
           placeholder="Name of Job"
           name="job_name"
-          value={formInput.job_name}
+          value={formInput.job_name} // access allowed due to dot.notation
           onChange={handleChange}
           required
         />
@@ -149,7 +147,7 @@ function JobForm({ obj }) {
     </Form>
   );
 }
-
+// prop types tell the component/function what to expect
 JobForm.propTypes = {
   obj: PropTypes.shape({
     job_name: PropTypes.string,
