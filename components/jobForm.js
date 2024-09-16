@@ -160,7 +160,7 @@ JobForm.propTypes = {
     firebaseKey: PropTypes.string,
   }),
 };
-
+// prevents errors, when certain fields aren't given values as our props are not required on this form so must have this option
 JobForm.defaultProps = {
   obj: initialState,
 };
