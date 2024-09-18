@@ -53,10 +53,10 @@ function JobForm({ obj }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form class="form" onSubmit={handleSubmit}>
       <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Job</h2>
 
-      <FloatingLabel controlId="floatingInput1" label="Job Name" className="mb-3">
+      <FloatingLabel class="title" controlId="floatingInput1" label="Job Name">
         <Form.Control
           type="text"
           placeholder="Name of Job"
@@ -67,7 +67,7 @@ function JobForm({ obj }) {
         />
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingInput2" label="Name of Company" className="mb-3">
+      <FloatingLabel class="title" controlId="floatingInput2" label="Name of Company">
         <Form.Control
           type="text"
           placeholder="Name of Company"
@@ -78,7 +78,7 @@ function JobForm({ obj }) {
         />
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingInput2" label="Add Job Board" className="mb-3">
+      <FloatingLabel class="title" controlId="floatingInput2" label="Add Job Board">
         <Form.Control
           type="text"
           placeholder="Add Job Board"
@@ -89,7 +89,7 @@ function JobForm({ obj }) {
         />
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingInput2" label="Job Description" className="mb-3">
+      <FloatingLabel class="title" controlId="floatingInput2" label="Job Description">
         <Form.Control
           type="text"
           placeholder="Job Description"
@@ -100,7 +100,7 @@ function JobForm({ obj }) {
         />
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingSelect" label="Job Category">
+      <FloatingLabel class="title" controlId="floatingSelect" label="Job Category">
         <Form.Select
           type=""
           placeholder="Job Category"
@@ -121,7 +121,7 @@ function JobForm({ obj }) {
         </Form.Select>
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingInput2" label="Add Notes" className="mb-3">
+      <FloatingLabel class="title" controlId="floatingInput2" label="Add Notes">
         <Form.Control
           type="text"
           placeholder="Add Notes"
@@ -132,7 +132,7 @@ function JobForm({ obj }) {
         />
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingInput2" label="Date Applied" className="mb-3">
+      <FloatingLabel class="title" controlId="floatingInput2" label="Date Applied">
         <Form.Control
           type="text"
           placeholder="date_applied"
@@ -143,7 +143,7 @@ function JobForm({ obj }) {
         />
       </FloatingLabel>
 
-      <Button variant="warning" type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Job</Button>
+      <Button class="button" variant="warning" type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Job</Button>
     </Form>
   );
 }

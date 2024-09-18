@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 function JobCard({ jobObj }) {
   return (
-    <Card className="card" style={{ width: '18rem', margin: '10px', border: '1px solid' }}>
+    <Card class="card" className="card" style={{ width: '18rem', margin: '10px', border: '1px solid' }}>
       <Card.Title style={{ textAlign: 'center', paddingTop: '10px' }}>{jobObj.job_name}</Card.Title>
       <Card.Body>
         <p className="card-text bold">{jobObj.company_name}</p>
