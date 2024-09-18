@@ -12,6 +12,15 @@ body {
   background-attachment: fixed;
 }
 
+.form {
+  color:antiquewhite;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .card {
   width: 190px;
   height: 290px;
