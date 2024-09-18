@@ -51,7 +51,7 @@ function JobForm({ obj }) {
       });
     }
   };
-
+  // just need to make sure this works
   return (
     <Form class="form" onSubmit={handleSubmit}>
       <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Job</h2>
