@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../utils/context/authContext';
 import { getJobs } from '../api/JobData';
 import JobCard from '../components/JobCard';
+import Calendar from '../components/Calendar';
 
 function Home() {
   const { user } = useAuth();
@@ -20,6 +21,7 @@ function Home() {
       {jobs.map((job) => (
         <JobCard key={job.firebaseKey} jobObj={job} onUpdate={getAllJobs} />
       ))}
+      <Calendar />
     </div>
   );
 }

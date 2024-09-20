@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Button, Form, FloatingLabel } from 'react-bootstrap';
 import { useAuth } from '../utils/context/authContext';
 import { createJob, updateJob, getCategory } from '../api/JobData';
+import Calendar from './Calendar';
 // props are arguments we pass to components, pass data as parameters from one component to another like from the form to the card
 const initialState = {
   job_name: '',
@@ -34,6 +35,14 @@ function JobForm({ obj }) {
       ...prevState,
       [name]: value,
     }));
+  };
+
+  const dateChange = (value) => {
+    setFormInput((prevState) => ({
+      ...prevState,
+      date_applied: value.format('MM/DD/YYYY'),
+    }));
+    console.warn(value.format('MM/DD/YYYY'));
   };
   // event handles the submit of the form either to create or update
   const handleSubmit = (e) => {
@@ -133,14 +142,7 @@ function JobForm({ obj }) {
       </FloatingLabel>
 
       <FloatingLabel controlId="floatingInput2" label="Date Applied" className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Date"
-          name="date_applied"
-          value={formInput.date_applied}
-          onChange={handleChange}
-          required
-        />
+        <Calendar date={formInput.date_applied} onChange={dateChange} />
       </FloatingLabel>
 
       <Button variant="warning" type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Job</Button>
