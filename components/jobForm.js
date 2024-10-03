@@ -1,9 +1,11 @@
+/* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { Button, Form, FloatingLabel } from 'react-bootstrap';
 import { useAuth } from '../utils/context/authContext';
 import { createJob, updateJob, getCategory } from '../api/JobData';
+import Calendar from './DatePicker';
 // props are arguments we pass to components, pass data as parameters from one component to another like from the form to the card
 const initialState = {
   job_name: '',
@@ -11,13 +13,14 @@ const initialState = {
   board_name: '',
   description: '',
   notes: '',
-  date_applied: '',
+  date_applied: 'MM/DD/YYYY',
   category: '',
 };
 
 function JobForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState); // hook manages state of a component (local or component specific) this hook always needs two values, inital value and what we are updating it to be, allows for a component to be rerendered when the update func is called
   const [categories, setCategories] = useState([]);
+
   const router = useRouter(); // global state management hook to route to different pages
   const { user } = useAuth(); // global hook user specific data
   // hook for what occurs after we render or rerender the DOM, when it mounts/or remounts if something changes
@@ -26,6 +29,13 @@ function JobForm({ obj }) {
     if (obj.category) setFormInput(obj);
   }, [obj, user]); // dependency array
   // event are user events that occur whent the user does "something" the event handleChange tells the form what to do when something happens
+  const dateChange = (value) => {
+    setFormInput((prevState) => ({
+      ...prevState,
+      date_applied: value.format('MM/DD/YYYY'),
+    }));
+    console.warn(value.format('MM/DD/YYYY'));
+  };
   const handleChange = (e) => {
     console.warn(e.target);
     const { name, value } = e.target;
@@ -35,6 +45,7 @@ function JobForm({ obj }) {
       [name]: value,
     }));
   };
+
   // event handles the submit of the form either to create or update
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -132,14 +143,10 @@ function JobForm({ obj }) {
         />
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingInput2" label="Date Applied" className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Date"
-          name="date_applied"
-          value={formInput.date_applied}
-          onChange={handleChange}
-          required
+      <FloatingLabel controlId="floatingInput2" className="mb-3">
+        <Calendar
+          date={formInput.date_applied}
+          onChange={dateChange}
         />
       </FloatingLabel>
 
