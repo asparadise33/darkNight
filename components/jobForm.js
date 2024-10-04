@@ -22,7 +22,7 @@ const initialState = {
 function JobForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState); // hook manages state of a component (local or component specific) this hook always needs two values, inital value and what we are updating it to be, allows for a component to be rerendered when the update func is called
   const [categories, setCategories] = useState([]);
-  const [date, setDate] = useState(new Date());
+  // const [date, setDate] = useState(new Date());
   const router = useRouter(); // global state management hook to route to different pages
   const { user } = useAuth(); // global hook user specific data
   // hook for what occurs after we render or rerender the DOM, when it mounts/or remounts if something changes
@@ -31,13 +31,14 @@ function JobForm({ obj }) {
     if (obj.category) setFormInput(obj);
   }, [obj, user]); // dependency array
   // event are user events that occur whent the user does "something" the event handleChange tells the form what to do when something happens
-  // const dateChange = (value) => {
-  //   setFormInput((prevState) => ({
-  //     ...prevState,
-  //     date_applied: value.format('MM/DD/YYYY'),
-  //   }));
-  //   console.warn(value.format('MM/DD/YYYY'));
-  // };
+
+  // need this new function to handle the date input/change because it's a different type of input/value (an event vs a date than our normal handle change function, used toLocaleDateString to format it the way I wanted it to be.
+  const handleDateChange = (date) => {
+    setFormInput((prevState) => ({
+      ...prevState,
+      date_applied: date.toLocaleDateString(),
+    }));
+  };
   const handleChange = (e) => {
     console.warn(e.target);
     const { name, value } = e.target;
@@ -47,7 +48,7 @@ function JobForm({ obj }) {
       [name]: value,
     }));
   };
-
+  // spread out our object, spread it out - line 47 overrides that one property that we spread out and creates a new name:value
   // event handles the submit of the form either to create or update
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -147,7 +148,7 @@ function JobForm({ obj }) {
 
       <FloatingLabel controlId="floatingInput2" className="mb-3">
         <div>
-          <DatePicker selected={date} onChange={(date) => setDate(date)} />
+          <DatePicker selected={formInput.date_applied} onChange={handleDateChange} />
         </div>
       </FloatingLabel>
 
