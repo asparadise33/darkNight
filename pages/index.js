@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../utils/context/authContext';
 import { getJobs } from '../api/JobData';
-import JobCard from '../components/JobCard';
+import JobCard from '../components/jobCard';
 
 function Home() {
   const { user } = useAuth();
