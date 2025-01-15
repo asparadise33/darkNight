@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getSingleJob } from '../../api/JobData';
-import JobForm from '../../components/JobForm';
+import JobForm from '../../components/jobForm';
 
 export default function EditJob() {
   const [editJob, setEditJob] = useState({});
